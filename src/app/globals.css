@@ -1,0 +1,416 @@
+@import "tailwindcss";
+
+:root {
+  --background: #080a0f;
+  --foreground: #eef0f3;
+  --muted: #8b939e;
+  --border: #1e2430;
+  --surface: #0f131a;
+  --surface-hover: #171d28;
+  --card: #12171f;
+  --accent: #e8b84a;
+  --accent-hover: #f5cc5c;
+  --chart-grid: #1a2030;
+  --gold: #f59e0b;
+  --silver: #94a3b8;
+  --success: #22c55e;
+  --danger: #ef4444;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(232, 184, 74, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(59, 130, 246, 0.05), transparent);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.btn-primary {
+  @apply rounded-xl bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black shadow-md shadow-amber-900/20 transition hover:bg-[var(--accent-hover)] disabled:opacity-50;
+}
+
+.btn-secondary {
+  @apply rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-medium transition hover:border-[var(--accent)]/30 hover:bg-[var(--surface-hover)] disabled:opacity-50;
+}
+
+.input {
+  @apply rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm outline-none transition focus:border-[var(--accent)]/50 focus:ring-2 focus:ring-[var(--accent)]/20;
+}
+
+code {
+  @apply rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs text-[var(--accent)];
+}
+
+/* Stat cards */
+.stat-card {
+  @apply rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 transition hover:border-[var(--border)]/80;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.stat-card-gold {
+  border-color: rgba(245, 158, 11, 0.25);
+  background: linear-gradient(145deg, rgba(245, 158, 11, 0.06), transparent);
+}
+
+.stat-card-silver {
+  border-color: rgba(148, 163, 184, 0.25);
+  background: linear-gradient(145deg, rgba(148, 163, 184, 0.06), transparent);
+}
+
+.stat-card-vnd {
+  border-color: rgba(34, 197, 94, 0.25);
+  background: linear-gradient(145deg, rgba(34, 197, 94, 0.06), transparent);
+}
+
+.stat-card-label {
+  @apply text-xs font-medium uppercase tracking-wider text-[var(--muted)];
+}
+
+.stat-card-value {
+  @apply mt-2 text-2xl font-bold tabular-nums tracking-tight;
+}
+
+.stat-card-sub {
+  @apply mt-1 text-xs text-[var(--muted)];
+}
+
+.stat-change {
+  @apply inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px] font-semibold tabular-nums;
+}
+
+.stat-change-up {
+  @apply bg-emerald-500/15 text-emerald-400;
+}
+
+.stat-change-down {
+  @apply bg-red-500/15 text-red-400;
+}
+
+.stat-change-flat {
+  @apply bg-[var(--surface)] text-[var(--muted)];
+}
+
+/* Market status bar */
+.market-status {
+  @apply flex flex-wrap items-center gap-x-6 gap-y-2 rounded-2xl border border-[var(--border)] bg-[var(--surface)]/60 px-4 py-2.5 text-xs;
+}
+
+.market-status-item {
+  @apply flex items-center gap-2;
+}
+
+.market-status-label {
+  @apply text-[var(--muted)];
+}
+
+.market-status-value {
+  @apply font-medium text-[var(--foreground)];
+}
+
+.market-status-dot {
+  @apply inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 font-semibold;
+}
+
+.market-status-live {
+  @apply bg-emerald-500/15 text-emerald-400;
+}
+
+.market-status-loading {
+  @apply bg-amber-500/15 text-amber-400;
+}
+
+.market-status-error {
+  @apply bg-red-500/15 text-red-400;
+}
+
+/* Chart hero card */
+.chart-hero {
+  @apply rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.chart-hero-header {
+  @apply flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] pb-3;
+}
+
+.chart-hero-title {
+  @apply text-base font-semibold tracking-tight;
+}
+
+.chart-hero-sub {
+  @apply text-xs text-[var(--muted)];
+}
+
+.trading-chart-hero {
+  height: 30rem;
+  width: 100%;
+  min-height: 22rem;
+}
+
+@media (min-width: 1280px) {
+  .trading-chart-hero {
+    height: 34rem;
+  }
+}
+
+/* Chart */
+.chart-wrap {
+  height: 22rem;
+  width: 100%;
+}
+
+.trading-chart {
+  height: 26rem;
+  width: 100%;
+  min-height: 20rem;
+}
+
+.trading-chart.trading-chart-hero {
+  height: 30rem;
+  min-height: 22rem;
+}
+
+@media (min-width: 1280px) {
+  .trading-chart.trading-chart-hero {
+    height: 34rem;
+  }
+}
+
+/* Navigator zoom lane (TradingView-style brush) */
+.trading-chart-nav {
+  height: 4.75rem;
+  width: 100%;
+  min-height: 4rem;
+}
+
+.chart-empty {
+  @apply flex h-64 flex-col items-center justify-center rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface)]/50 px-6 text-center;
+}
+
+.chart-empty-sm {
+  @apply h-40;
+}
+
+.chart-legend-grid {
+  @apply grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+.chart-legend-grid-compact {
+  @apply gap-1.5 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+.chart-legend-item {
+  @apply flex cursor-pointer items-center gap-2 rounded-xl border border-transparent bg-[var(--surface)]/60 px-3 py-2.5 text-sm transition hover:border-[var(--border)];
+}
+
+.chart-legend-item-compact {
+  @apply rounded-lg px-2 py-1.5 text-xs;
+}
+
+.chart-legend-item-compact .chart-legend-checkbox {
+  @apply h-3.5 w-3.5;
+}
+
+.chart-legend-item-compact .chart-legend-line {
+  @apply w-4;
+}
+
+.chart-legend-item-compact .chart-legend-price {
+  @apply text-[10px];
+}
+
+.chart-legend-item-on {
+  @apply border-[var(--accent)]/25 bg-[var(--surface)];
+}
+
+.chart-legend-checkbox {
+  @apply h-4 w-4 shrink-0 rounded border-[var(--border)] accent-[var(--accent)];
+}
+
+.chart-legend-line {
+  @apply h-1 w-6 shrink-0 rounded-full;
+}
+
+.chart-legend-label {
+  @apply min-w-0 flex-1 truncate text-[var(--muted)];
+}
+
+.chart-legend-item-on .chart-legend-label {
+  @apply text-[var(--foreground)];
+}
+
+.chart-legend-price {
+  @apply shrink-0 text-xs font-semibold text-[var(--accent)];
+}
+
+.skeleton {
+  @apply animate-pulse rounded-xl bg-[var(--surface)]/80;
+}
+
+.chart-tooltip {
+  @apply rounded-xl border border-[var(--border)] bg-[var(--card)]/95 px-4 py-3 shadow-xl backdrop-blur;
+}
+
+.chart-tooltip-time {
+  @apply text-xs font-medium text-[var(--accent)];
+}
+
+/* Tabs */
+.tab-pill-group {
+  @apply flex flex-wrap rounded-xl border border-[var(--border)] bg-[var(--surface)] p-1;
+}
+
+.tab-pill {
+  @apply rounded-lg px-3 py-1.5 text-xs font-medium text-[var(--muted)] transition;
+}
+
+.tab-pill-active {
+  @apply bg-[var(--accent)] text-black shadow-sm;
+}
+
+/* Settings hub */
+.settings-page-title {
+  @apply text-xl font-bold uppercase tracking-wide;
+}
+
+.settings-kv-card {
+  @apply overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)];
+}
+
+.settings-kv-card-header {
+  @apply border-b border-[var(--border)] px-5 py-4;
+}
+
+.settings-kv-card-title {
+  @apply text-sm font-bold uppercase tracking-wider;
+}
+
+.settings-kv-list {
+  @apply divide-y divide-[var(--border)] px-5;
+}
+
+.settings-kv-row {
+  @apply grid grid-cols-1 gap-1 py-3 text-sm sm:grid-cols-[1fr_auto] sm:items-center sm:gap-4;
+}
+
+.settings-kv-row dt {
+  @apply text-[10px] font-semibold uppercase tracking-widest text-[var(--muted)];
+}
+
+.settings-kv-row dd {
+  @apply font-mono text-sm text-[var(--foreground)] sm:text-right;
+}
+
+.settings-kv-footer {
+  @apply border-t border-[var(--border)] px-5 py-3;
+}
+
+.settings-nav-card {
+  @apply rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 transition hover:border-[var(--accent)]/40;
+}
+
+.settings-nav-icon {
+  @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--surface)] text-[var(--accent)];
+}
+
+.settings-nav-title {
+  @apply text-xs font-bold uppercase tracking-wide;
+}
+
+.settings-provider-hero {
+  @apply flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4;
+}
+
+.settings-provider-icon {
+  @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl;
+}
+
+.settings-provider-icon-telegram {
+  @apply bg-[#229ED9];
+}
+
+.settings-secret-row {
+  @apply items-start py-4;
+}
+
+.settings-help-prose {
+  @apply space-y-2 text-[11px] leading-relaxed text-[var(--muted)];
+}
+
+.settings-help-prose p {
+  @apply m-0;
+}
+
+.settings-help-prose ol,
+.settings-help-prose ul {
+  @apply my-1 space-y-1 pl-4;
+}
+
+.settings-help-prose ol {
+  @apply list-decimal;
+}
+
+.settings-help-prose ul {
+  @apply list-disc;
+}
+
+.settings-help-prose strong {
+  @apply font-medium text-[var(--foreground)];
+}
+
+.settings-help-prose code {
+  @apply rounded bg-black/30 px-1 py-0.5 font-mono text-[10px] text-[var(--accent)];
+}
+
+.settings-help-prose .help-url {
+  @apply mt-1 block break-all rounded-md border border-[var(--border)] bg-black/25 px-2 py-1.5 font-mono text-[10px] leading-snug text-[var(--foreground)];
+}
+
+.settings-help-prose .help-pre {
+  @apply mt-1 overflow-x-auto rounded-md border border-[var(--border)] bg-black/30 p-2 font-mono text-[10px] leading-snug text-[var(--foreground)];
+}
+
+.settings-inline-help {
+  @apply max-h-64 overflow-y-auto;
+}
+
+.reply-group-textarea {
+  @apply mt-1 w-full resize-y font-mono text-[10px] leading-snug;
+}
+
+.reply-group-preview {
+  @apply mt-2 max-h-36 overflow-auto rounded-md border border-[var(--border)] bg-black/30 p-2 font-mono text-[9px] leading-snug text-emerald-200/90 whitespace-pre-wrap;
+}
+
+/* Alert toasts */
+.alert-toast-stack {
+  @apply fixed right-4 top-4 z-50 flex max-w-sm flex-col gap-2;
+}
+
+.alert-toast {
+  @apply flex items-start gap-3 rounded-xl border border-amber-500/30 bg-[var(--card)]/95 p-4 shadow-2xl backdrop-blur;
+  animation: slide-in 0.35s ease-out;
+}
+
+.sidebar {
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.03);
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
